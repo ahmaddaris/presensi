@@ -13,22 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/seed', function(\App\Student $student) {
+    $faker = Faker\Factory ::create();
+    
+    foreach (range(1,100) as $x) {
+        $student->create([
+            'name' => $faker->name(3)          
+        ]);
+    }
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/programs', function($id) {
-    return "daftar program";
-});
+Route::get('mahad/{mahad_id}', 'MahadController@index') ;
 
-Route::post('/programs', function() {
-    return "program baru";
-});
+Route::get('mahad/{mahad}/program/tambah', 'ProgramController@create') ;
 
-Route::delete('/programs', function() {
-    return "hapus program";
-});
+Route::post('mahad/{mahad}/program/store', 'ProgramController@store') ;
+//Route::get('mahad/{mahad}/program/edit/{id}', 'ProgramController@edit')->name('program.edit') ;
+Route::delete('mahad/{mahad}/program/', 'ProgramController@destroy')->name('program.destroy');
+Route::get('mahad/{mahad}/program', 'ProgramController@show')->name('program.show');
+
+Route::get('/students', 'StudentController@index');
+
+Route::get('/home', 'HomeController@index')->name('home');
