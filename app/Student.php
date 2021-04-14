@@ -10,4 +10,8 @@ class Student extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function meetings() {
+        return $this->belongsToMany(Meeting::class);
+    }
 }

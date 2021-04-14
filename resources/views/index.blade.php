@@ -24,9 +24,13 @@
             echo $i;
           @endphp
         </td>
-        <td>{{ ucwords($program->name)}}<br>
-          <sub>tag1</sub>
-          <sub>tag2</sub>
+        <td>
+          <a href="{{$program->id}}">
+            {{ ucwords($program->name)}}
+            <br>
+          </a>
+          <sub>reg</sub>
+          <sub>jun</sub>
         </td>
         <td>
         @switch($program->status)
@@ -41,9 +45,7 @@
             <span class="badge badge-secondary">{{$program->status}}</span></td>
                 
         @endswitch
-        <td>
-          <form action="{{ route('program.destroy', $program->id) }}" method="POST">
-            <a class="btn btn-outline-info btn-sm" href="">Show</a>
+        <td method="POST">
             <a class="btn btn-outline-primary btn-sm" href="">Edit</a>
             @csrf
             @method('DELETE')

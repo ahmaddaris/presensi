@@ -11,8 +11,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        App\User::create([
-            
-        ]);
+        $faker = Faker::create();
+        foreach (range(1.10) as $index) {
+            DB::table('users')->insert ([
+                'name' => $faker->word,
+                'email' => $faker->email,
+                'password' => bcrypt('secret')
+            ]);
+        }
     }
 }

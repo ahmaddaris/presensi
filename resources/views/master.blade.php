@@ -63,10 +63,10 @@ div.content {
 
 <div class="sidebar">
   <a class="active" href="/home">{{ config('app.name', 'Presensi') }}</a>
-  <a href="/mahad/1">Ma'had Umar</a>
-  <a href="/mahad/2">Kampus Tahfizh</a>
-  <a href="/mahad/3">Ma'had Ilmi</a>
-  <a href="/mahad/4">Ma'had Yaa Abati</a>
+  <a href="{{route('mahad.show', ['mahad' => 1])}}">Ma'had Umar</a>
+  <a href="{{route('mahad.show', ['mahad' => 2])}}">Kampus Tahfizh</a>
+  <a href="{{route('mahad.show', ['mahad' => 3])}}">Ma'had Ilmi</a>
+  <a href="{{route('mahad.show', ['mahad' => 4])}}">Ma'had Yaa Abati</a>
 </div>
 
 <div class="content">

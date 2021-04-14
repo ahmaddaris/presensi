@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
 @extends('master')
 @section('content')
+<h2>Program-Program {{$mahad->name}}</h2>
 
   <table class='table'>
     <thead>
@@ -24,9 +25,13 @@
             echo $i;
           @endphp
         </td>
-        <td>{{ ucwords($program->name)}}<br>
-          <sub>tag1</sub>
-          <sub>tag2</sub>
+        <td>
+          <a href="{{ route('program.show', ['mahad'=>$mahad->id, 'program'=>$program->id]) }}">
+            {{ ucwords($program->name)}}
+            <br>
+          </a>
+          <sub>reg</sub>
+          <sub>jun</sub>
         </td>
         <td>
         @switch($program->status)
@@ -42,25 +47,23 @@
                 
         @endswitch
         <td>
-          <form action="{{ route('program.destroy', $program->id) }}" method="POST">
-            <a class="btn btn-outline-info btn-sm" href="">Show</a>
-            <a class="btn btn-outline-primary btn-sm" href="">Edit</a>
+          <a class="btn btn-outline-primary btn-sm" href="{{ route('program.edit',  ['mahad' => $mahad->id, 'program' => $program->id]) }}">Edit</a>
+          <form action="{{route('program.destroy', ['mahad'=>$mahad->id, 'program'=>$program->id]) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
         </form>
         </td>
+        <input type="hidden" name="mahad_id" value="{{$program->mahad_id}}">
       </tr>
       @endforeach
-    </tbody> 
+    </tbody>
   </table>
-<a href="{{$program->mahad_id ?? ''}}/program/tambah" class="btn btn-info" role="button">
+<a href="{{ route('program.create', ['mahad' => $mahad->id]) }}" class="btn btn-info" role="button">
   <i class="bi bi-plus"></i>
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-  </svg> Tambah Program
+  </svg>Tambah Program 
 </a>
-
-
 
 @endsection

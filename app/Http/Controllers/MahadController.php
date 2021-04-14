@@ -8,7 +8,6 @@ use App\Program;
 
 use Illuminate\Http\Request;
 
-
 class MahadController extends Controller
 {
     /**
@@ -16,10 +15,10 @@ class MahadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($mahad_id)
+    public function show(Mahad $mahad)
     {
-        $programs = Program::get()->where('mahad_id', $mahad_id);
-        return view('mahads.index', compact('programs'));
+        $programs = $mahad->programs;
+        return view('programs.index', compact('programs', 'mahad'));
     }
 
     /**
@@ -27,72 +26,5 @@ class MahadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('mahads.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->Validate([
-            'name'=>'required'
-        ]);
-    
-        $mahad = new Mahad ([
-            'name' => get('name')
-        ]);
-        $mahad->save();
-        return redirect('/mahads'->with('success', 'berhasil menyimpan'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   
 }

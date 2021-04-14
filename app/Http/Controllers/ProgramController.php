@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classroom;
 use App\Mahad;
 use App\Program;
 use Illuminate\Http\Request;
@@ -16,8 +17,7 @@ class ProgramController extends Controller
     public function index(Mahad $mahad)
     {
         // $data['programs'] = $mahad->programs()->paginate(10);
-        echo "fasfasf";
-        // return view('mahads.index', $data);
+        // return view('programs.index', $data);
     }
 
     /**
@@ -27,8 +27,8 @@ class ProgramController extends Controller
      */
     public function create(Mahad $mahad)
     {
-        return view('mahads.create', [
-            'mahad_id' => $mahad->id
+        return view('programs.create', [
+            'mahad_id' => $mahad->id,
         ]);
     }
 
@@ -44,10 +44,9 @@ class ProgramController extends Controller
             'name' => 'required', 
             'status' => 'required',
         ]);
-
+        
         $mahad->programs()->create($data);
-
-        return redirect('/mahad/' . $mahad->id);
+        return redirect()->route('mahad.show', [$mahad->id]);
     }
 
     /**
@@ -56,10 +55,12 @@ class ProgramController extends Controller
      * @param  \App\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function show(Program $program)
+    public function show(Mahad $mahad, Program $program)
     {
-        //
-    } 
+        $classrooms = $program->classrooms;
+        $header = ['No', 'Kelas', 'Deskripsi', 'Aksi'];
+        return view('classrooms.index', compact('classrooms', 'program', 'header'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -70,7 +71,7 @@ class ProgramController extends Controller
     public function edit($id)
     {
         $data = Program::find($id);
-        return view('mahads.edit', ['data' => $data]);
+        return view('programs.edit', ['data' => $data]);
     }
 
     /**
@@ -91,8 +92,11 @@ class ProgramController extends Controller
      * @param  \App\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Program $program)
+    public function destroy($mahad, $program)
     {
-        //
+        $program = Program::find($program)->delete();
+
+
+        return redirect()->back()->with('success', 'Program deleted successfully');
     }
 }
