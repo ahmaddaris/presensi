@@ -8,7 +8,7 @@ class Student extends Model
 {
     //protected $table = 'students';
     protected $fillable = [
-        'name'
+        'name', 'address', 'wa', 'detail', 'created_at', 'updated_at'
     ];
 
     public function meetings() {

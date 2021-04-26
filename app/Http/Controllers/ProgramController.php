@@ -68,22 +68,27 @@ class ProgramController extends Controller
      * @param  \App\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Mahad $mahad, Program $program)
     {
-        $data = Program::find($id);
-        return view('programs.edit', ['data' => $data]);
+        $program = Program::find($program->id);
+        return view('programs.edit', ['program'=>$program]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage.`
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Program $program)
+    public function update(Mahad $mahad, Program $program, Request $request)
     {
-        //
+        $program->update([
+            'name' => $request->name,
+            'status' => $request->status
+        ]);
+        return redirect()->route('mahad.show', $program->mahad_id)
+            ->with('success', 'Berhasil Update');
     }
 
     /**

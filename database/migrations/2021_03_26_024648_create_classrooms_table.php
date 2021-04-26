@@ -1,5 +1,6 @@
 <?php
 
+use App\Classroom;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,12 @@ class CreateClassroomsTable extends Migration
             $table->timestamps();
         });
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->using(ClassroomUser::class)->withTimeStamps();
+    }
+
 
     /**
      * Reverse the migrations.

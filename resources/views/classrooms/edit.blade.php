@@ -2,31 +2,29 @@
 @extends('master')
 
 @section('content')
+<h2>Edit Kelas</h2>
 
-  <form action="/mahad/{{ $mahad_id ?? '' }}/program/store" method="post">
-    {{csrf_field()}}
-    <div class="row">
-      <div class="col-sm-6">
-        <label for="email">Nama Program</label>
-        <input type="text" name="name" placeholder="Name" value="{{$program->name}}">
-      </div>
+<form action="{{route('classroom.update', ['program'=>$classroom->program_id, 'classroom'=>$classroom->id]) }}" method="post">
+  {{csrf_field()}}
+  {{ method_field('PATCH')}} 
+
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="name" width="20">Nama Kelas</label>
+      <input type="text" name="name" required="required" value="{{ $classroom->name}} ">
     </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <label for="status">Status</label>
-          <select name="status" id="status">
-          <option value="1">Sedang Berjalan</option>
-          <option value="2">Segera</option>
-          <option value="3">Selesai</option>
-        </select>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <label for="detail" width="20">Detail</label>
+      <input type="text" name="detail" required="required" value="{{ $classroom->detail}} ">
     </div>
-    <div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+  </div>
+
+  <div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form> 
 
-  </form>
 
-
-@endsection
+@endsection 

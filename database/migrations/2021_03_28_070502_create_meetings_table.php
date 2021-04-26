@@ -15,7 +15,7 @@ class CreateMeetingsTable extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('attendance_id')->constrained();
+            $table->foreignId('classroom_id')->constrained()->on('classrooms')->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });

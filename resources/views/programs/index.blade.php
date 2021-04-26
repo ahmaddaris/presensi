@@ -26,7 +26,7 @@
           @endphp
         </td>
         <td>
-          <a href="{{ route('program.show', ['mahad'=>$mahad->id, 'program'=>$program->id]) }}">
+          <a href="{{ route('program.show', ['mahad'=>$program->mahad_id, 'program'=>$program->id]) }}">
             {{ ucwords($program->name)}}
             <br>
           </a>
@@ -48,11 +48,11 @@
         @endswitch
         <td>
           <a class="btn btn-outline-primary btn-sm" href="{{ route('program.edit',  ['mahad' => $mahad->id, 'program' => $program->id]) }}">Edit</a>
-          <form action="{{route('program.destroy', ['mahad'=>$mahad->id, 'program'=>$program->id]) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-        </form>
+          <form action="{{route('program.destroy', ['mahad'=>$mahad->id, 'program'=>$program->id]) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin mau menghapus data?')">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+          </form>
         </td>
         <input type="hidden" name="mahad_id" value="{{$program->mahad_id}}">
       </tr>

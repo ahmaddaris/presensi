@@ -15,4 +15,5 @@ class Attendance extends Model
     public function meetings() {
         return $this->hasMany(Meeting::class);
     
+    }
 }

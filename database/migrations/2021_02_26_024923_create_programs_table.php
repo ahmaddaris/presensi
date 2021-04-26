@@ -17,6 +17,7 @@ class CreateProgramsTable extends Migration
             $table->id();
             $table->foreignId('mahad_id')->constrained()->on('mahads')->onDelete('cascade');
             $table->string('name');
+            
             $table->enum('status', ['selesai', 'sedang berjalan', 'segera'] );
             $table->timestamps();
         });

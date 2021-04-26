@@ -26,3 +26,5 @@ Route::get('mahad/{mahad}', 'MahadController@show')->name('mahad.show');
 Route::resource('mahad/{mahad}/program', 'ProgramController');
 
 Route::resource('program/{program}/classroom', 'ClassroomController')->except('index');
+
+Route::resource('classroom/{classroom}/meeting', 'MeetingController');

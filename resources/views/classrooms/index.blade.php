@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
 @extends('master')
 @section('content')
-<h2>{{$program->name}}</h2>
+<h2>kelas {{$program->name }} </h2>
   <table class='table'>
     <thead>
     <tr>
@@ -9,7 +9,6 @@
           <th>{{ $item }}</th>
       @endforeach
     </tr>
- 
     </thead>
     <tbody>
       @php
@@ -33,21 +32,10 @@
           <sub>pagi</sub>
         </td>
         <td>
-        @switch($classroom->status)
-            @case('sedang berjalan')
-            <div class="progress-bar bg-success" style="width:67%" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100">67%</div></td>                
-                @break
-            @case('segera')
-            <span class="badge badge-warning">{{$classroom->status}}</span></td>
-                
-                @break
-            @default
-            <span class="badge badge-secondary">{{$classroom->status}}</span></td>
-                
-        @endswitch
+          {{$classroom->detail}}
         <td>
-          <form action="{{route('classroom.destroy', ['program'=>$program->id, 'classroom'=>$classroom->id])}}" method="POST">
-            <a class="btn btn-outline-primary btn-sm" href="">Edit</a>
+          <a class="btn btn-outline-primary btn-sm" href="{{ route('classroom.edit',  ['program'=>$program->id, 'classroom'=>$classroom->id]) }}">Edit</a>
+          <form action="{{route('classroom.destroy', ['program'=>$program->id, 'classroom'=>$classroom->id])}}" method="POST" onsubmit="return confirm('Apakah Anda yakin mau menghapus data?')">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>

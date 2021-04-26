@@ -55,9 +55,11 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Program $program, Classroom $classroom)
     {
-        //
+        $meetings = $classroom->meetings;
+        $header = ['No', 'Nama', 'Aksi'];
+        return view('templates.table1', compact('header', 'classroom', 'meetings', 'program'));
     }
 
     /**
@@ -66,9 +68,9 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Program $program, Classroom $classroom)
     {
-        //
+        return view('classrooms.edit', ['classroom'=>$classroom]);
     }
 
     /**
@@ -78,9 +80,14 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Program $program, Classroom $classroom, Request $request)
     {
-        //
+        $classroom->update([
+            'name'=>$request->name,
+            'detail'=>$request->detail
+        ]);
+
+        return redirect()->route('program.show', ['mahad'=>$program->mahad_id, 'program'=>$program->id]); 
     }
 
     /**

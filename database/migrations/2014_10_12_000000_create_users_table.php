@@ -25,6 +25,15 @@ class CreateUsersTable extends Migration
     }
 
     /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function classrooms()
+    {
+        return $this->belongsToMany(Classroom::class)->using(ClassroomUser::class)->withTimeStamps();
+    }
+
+    /**
      * Reverse the migrations.
      *
      * @return void

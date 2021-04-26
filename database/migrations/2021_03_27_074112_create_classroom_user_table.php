@@ -15,9 +15,15 @@ class CreateClassroomUserTable extends Migration
     {
         Schema::create('classroom_user', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('classroom_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+
+            $table->foreign('classroom_id')->references('id')->on('classrooms');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -2,6 +2,7 @@
 @extends('master')
 
 @section('content')
+<h2>Tambah Kelas</h2>
 
 <form action="{{route('classroom.store', ['program'=>$program_id]) }}" method="post">
   {{csrf_field()}}
